@@ -3,4 +3,4 @@ budget book
 
 program to calculate your budget.
 
-uses PostgreSQL and Hibernate
+using PostgreSQL and Hibernate
