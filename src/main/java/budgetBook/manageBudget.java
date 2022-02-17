@@ -2,12 +2,19 @@ package budgetBook;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.List;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Root;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.CriteriaQuery;
 import org.postgresql.Driver;
 
 
@@ -34,6 +41,9 @@ public class manageBudget {
 		manageBudget MB = new manageBudget();
 	
 		Integer empID1 = MB.addBudget(Date.valueOf("2015-3-31"),"Soap",0.99);
+	
+		List<budget> table = MB.getBudget();
+		System.out.println("date: "+table.get(0).getDate()+" product: +"+table.get(0).getProduct()+" price: "+table.get(0).getPrice());
 	}
 	
 	public Integer addBudget(Date date,String product,Double price)
@@ -60,4 +70,14 @@ public class manageBudget {
 		return budgetID;
 		
 	}
+	
+public List<budget> getBudget()
+{
+	Session session = factory.openSession();
+
+	Query query = session.createQuery("from budget");
+	List<budget> list = query.list();
+	
+	return list;
+}
 }

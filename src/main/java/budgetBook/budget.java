@@ -14,6 +14,11 @@ public class budget {
 		setProduct(p);
 		setPrice(pr);
 	}
+	
+	public budget()
+	{
+		
+	}
 
 	public Date getDate() {
 		return date;
